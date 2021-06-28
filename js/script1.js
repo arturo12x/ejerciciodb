@@ -1,63 +1,65 @@
+//TAREA VALIDAR CON EXPRESIONES REGULARES O SUBSTRINGS EL DOMINIO UTLAGUNA.EDU.MX
+
 $(document).ready(function () {
-$('#form1').validate({
-    rules:{
-nombre:{
-    required:true
-},
-        apelido:{
-            required:true
-        },
-        edad:{
-            required:true
-        },
-        email:{
-            required:true,
-email: true
+    $('#form1').validate({
+        rules: {
+            nombre: {
+                required: true
+            },
+            apelido: {
+                required: true
+            },
+            edad: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            }
         }
-
-
-
-
-
-    }
-
-
-
-});
+    });
 
     $('#add').click(function () {
 
-        if($('#form1').valid())
-        {
+        if ($('#form1').valid()) {
+            const $result = $('#warning');
+            const email = $('#email').val();
+            $result.text('');
 
-        var formData = $('#form1').serialize();
-        formData += "&accion=agregar";
-        $.ajax({
-            data: formData,
-            type: 'POST',
-            url: 'php/crud.php',
-            success: function (data) {
+            if (!validaremail(email)) {
+                $result.text('Invalid Address');
+                return;
+            }
 
-                    if (data==1000) {
-                        alert('There is an error')
+            console.log('email valido');
+
+            var formData = $('#form1').serialize();
+            formData += "&accion=agregar";
+            $.ajax({
+                data: formData,
+                type: 'POST',
+                url: 'php/crud.php',
+                success: function (data) {
+
+                    resp1 = JSON.parse(data);
+                    var codigo = resp1.code;
+                    var mensaje = resp1.desc;
+                    var idst = resp1.idstu;
+                    if (codigo == 1000) {
+                        alert(mensaje)
 
                     }
 
-                if (data==1001) {
-                    alert('Student added succesfully');
+                    if (codigo == 1001) {
+                        alert(mensaje + " " + idst);
 
+                    }
+                    if (codigo == 1002) {
+                        alert(mensaje);
+                    }
                 }
-                if (data==1002) {
-                    alert('You have an error in your sql statement');
+            });
 
-                }
-
-
-
-            }
-        });
-            }else{
-            console.log('Algo no estas escribiendo');
         }
     });
 
@@ -70,20 +72,23 @@ email: true
             type: 'POST',
             url: 'php/crud.php',
             success: function (data) {
+                resp1 = JSON.parse(data);
 
+                var codigo = resp1.code;
+                var mensaje = resp1.desc;
+                var idst = resp1.idstu;
 
-                if (data==2000) {
-                    alert('The student doesnt exist');
+                if (codigo == 2000) {
+                    alert(mensaje);
 
                 }
 
-                if (data==2001) {
-                    alert('Student updated succesfully');
+                if (codigo == 2001) {
+                    alert(mensaje + " " + idst);
 
                 }
-                if (data==2002) {
-                    alert('You have an error in your sql statement');
-
+                if (codigo == 2002) {
+                    alert(mensaje);
                 }
 
             }
@@ -101,19 +106,24 @@ email: true
             url: 'php/crud.php',
             success: function (data) {
 
+                resp1 = JSON.parse(data);
 
+                var codigo = resp1.code;
+                var mensaje = resp1.desc;
+                var idst = resp1.idstu;
 
-                if (data==3000) {
-                    alert('The student doesnt exist');
+                if (codigo == 3000) {
+                    alert(mensaje);
 
                 }
 
-                if (data==3001) {
-                    alert('Student deleted succesfully');
+                if (codigo == 3001) {
+                    alert(mensaje + " " + idst);
+
 
                 }
-                if (data==3002) {
-                    alert('You have an error in your sql statement');
+                if (codigo == 3002) {
+                    alert(mensaje);
 
                 }
 
@@ -121,4 +131,12 @@ email: true
             }
         });
     });
+
+
 });
+
+function validaremail(email) {
+    console.log('validacion de email');
+    const re = /^[a-zA-Z0-9_.+-]+@?(utlaguna.edu.mx|UTLAGUNA.EDU.MX)$/g
+    return re.test(email);
+}
