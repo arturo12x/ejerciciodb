@@ -34,7 +34,7 @@ $(document).ready(function () {
             console.log('email valido');
 
             var formData = $('#form1').serialize();
-            formData += "";
+            formData += ""; //TODO: REGRESAR EL ACTION AGREGAR PARA QUE FUNCIONE
             $.ajax({
                 data: formData,
                 type: 'POST',
