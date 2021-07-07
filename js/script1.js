@@ -34,7 +34,7 @@ $(document).ready(function () {
             console.log('email valido');
 
             var formData = $('#form1').serialize();
-            formData += "&accion=agregar";
+            formData += "";
             $.ajax({
                 data: formData,
                 type: 'POST',
@@ -45,18 +45,8 @@ $(document).ready(function () {
                     var codigo = resp1.code;
                     var mensaje = resp1.desc;
                     var idst = resp1.idstu;
-                    if (codigo == 1000) {
-                        alert(mensaje)
+                    alert(mensaje + " " + idst);
 
-                    }
-
-                    if (codigo == 1001) {
-                        alert(mensaje + " " + idst);
-
-                    }
-                    if (codigo == 1002) {
-                        alert(mensaje);
-                    }
                 }
             });
 
@@ -78,18 +68,7 @@ $(document).ready(function () {
                 var mensaje = resp1.desc;
                 var idst = resp1.idstu;
 
-                if (codigo == 2000) {
-                    alert(mensaje);
-
-                }
-
-                if (codigo == 2001) {
-                    alert(mensaje + " " + idst);
-
-                }
-                if (codigo == 2002) {
-                    alert(mensaje);
-                }
+                alert(mensaje + " " + idst);
 
             }
         });
@@ -112,20 +91,7 @@ $(document).ready(function () {
                 var mensaje = resp1.desc;
                 var idst = resp1.idstu;
 
-                if (codigo == 3000) {
-                    alert(mensaje);
-
-                }
-
-                if (codigo == 3001) {
-                    alert(mensaje + " " + idst);
-
-
-                }
-                if (codigo == 3002) {
-                    alert(mensaje);
-
-                }
+                alert(mensaje + " " + idst);
 
 
             }
