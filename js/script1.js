@@ -1,21 +1,14 @@
 //TAREA VALIDAR CON EXPRESIONES REGULARES O SUBSTRINGS EL DOMINIO UTLAGUNA.EDU.MX
 
 $(document).ready(function () {
-    $('#form1').validate({
-        rules: {
-            nombre: {
-                required: true
-            },
-            apelido: {
-                required: true
-            },
-            edad: {
-                required: true
-            },
-            email: {
-                required: true,
-                email: true
-            }
+
+function setwhite(){
+$('#nombre').css('background-color','white');
+$('#apellido').css('background-color','white');
+$('#edad').css('background-color','white');
+$('#email').css('background-color','white');
+$('#id').css('background-color','white');
+}
         }
     });
 
