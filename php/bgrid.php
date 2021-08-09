@@ -19,10 +19,21 @@ if (isset($params['current'])) {
 }
 
 $mysql = 'SELECT * FROM STUDENTS ';
-$sqltotal .= $mysql;
-$sqlcon .= $mysql;
-$inicio = ($page - 1)*$limite;
+$sqltot.=$mysql;
+$sqlcon.=$mysql;
 
+if(!empty($busqueda)){
+    $where.="WHERE (";
+    $where.="name LIKE '%".$busqueda."%' ";
+    $where.="OR lastname LIKE '%".$busqueda."%' ";
+    $where.="OR age LIKE '%".$busqueda."%' ";
+    $where.="OR email LIKE '%".$busqueda."%' )";
+}
+  //
+if(!empty($where) or $where!=""){
+    $sqltot.=$where;
+    $sqlcon.=$where;
+}
 $sqlcon.="LIMIT $inicio, $limite";
 
 $querytop = mysqli_query($conn, $sqltot) or die(mysqli_error($conn));
