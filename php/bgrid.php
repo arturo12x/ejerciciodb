@@ -25,7 +25,7 @@ $inicio = ($page - 1)*$limite;
 
 $sqlcon.="LIMIT $inicio, $limite";
 
-$querytop = mysqli_query($conn, $mysql) or die(mysqli_error($conn));
+$querytop = mysqli_query($conn, $sqltot) or die(mysqli_error($conn));
 
 $totalRecords = mysqli_num_rows($querytop);
 
