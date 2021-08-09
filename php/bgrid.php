@@ -4,11 +4,14 @@ include_once('conex.php');
 $params = array();
 $totalRecords = array();
 $data = array();
-$sqltotal = "";
+$sqltot = "";
 $sqlcon = "";
+$where="";
 $params = $_REQUEST;
+
 $limite = $params['rowCount'];
 
+$busqueda = $params['searchPhrase'];
 
 
 
@@ -19,6 +22,7 @@ if (isset($params['current'])) {
     $page = 1;
 }
 
+$inicio=($page-1)*$limite;
 $mysql = 'SELECT * FROM STUDENTS ';
 $sqltot.=$mysql;
 $sqlcon.=$mysql;
