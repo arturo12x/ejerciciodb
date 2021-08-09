@@ -31,7 +31,7 @@ if(!empty($busqueda)){
     $where.="OR age LIKE '%".$busqueda."%' ";
     $where.="OR email LIKE '%".$busqueda."%' )";
 }
-
+  //
 if(!empty($where) or $where!=""){
     $sqltot.=$where;
     $sqlcon.=$where;
