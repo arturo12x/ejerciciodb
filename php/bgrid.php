@@ -3,6 +3,13 @@ include_once('conex.php');
 $params = array();
 $totalRecords = array();
 $data = array();
+$where="";
+$sqltot = "";
+$sqlcon="";
+$params=$_REQUEST;
+
+$busqueda=$params['searchPhrase'];
+$limite=$params['rowCount'];
 
 
 if (isset($params['current'])) {
@@ -12,13 +19,32 @@ if (isset($params['current'])) {
     $page = 1;
 }
 
-$mysql = 'SELECT * FROM STUDENTS';
+$inicio=($page -1)*$limite;
+$mysql = 'SELECT * FROM STUDENTS ';
+$sqltot.=$mysql;
+$sqlcon.=$mysql;
 
-$querytop = mysqli_query($conn, $mysql) or die(mysqli_error($conn));
+if(!empty($busqueda)){
+    $where.="WHERE (";
+    $where.="name LIKE '%".$busqueda."%' ";
+    $where.="OR lastname LIKE '%".$busqueda."%' ";
+    $where.="OR age LIKE '%".$busqueda."%' ";
+    $where.="OR email LIKE '%".$busqueda."%' )";
+}
+
+if(!empty($where) or $where!=""){
+    $sqltot.=$where;
+    $sqlcon.=$where;
+}
+$sqlcon.="LIMIT $inicio, $limite";
+
+
+$querytop = mysqli_query($conn, $sqltot) or die(mysqli_error($conn));
 
 $totalRecords = mysqli_num_rows($querytop);
 
-$queryrecords = mysqli_query($conn, $mysql) or die(mysqli_error($conn));
+$queryrecords = mysqli_query($conn, $sqlcon) or die(mysqli_error($conn));
+
 
 
 while ($row = mysqli_fetch_assoc($queryrecords)) {
@@ -33,4 +59,3 @@ $json_data = array(
 );
 
 echo json_encode($json_data);
-?>
