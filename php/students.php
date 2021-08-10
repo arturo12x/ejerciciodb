@@ -1,19 +1,19 @@
 <?php
-class students{
+class students
+{
     public $id;
-    public $nombre;
-    public $apellido;
-    public $edad;
+    public $name;
+    public $lastname;
+    public $age;
     public $email;
-    
 
-    function set($id, $nombre, $apellido,$edad,$email){
+
+    function set($id, $name, $lastname, $age, $email)
+    {
         $this->id = $id;
-        $this->nombre = $nombre;
-        $this->apellido = $apellido;
-        $this->edad = $edad;
+        $this->name = $name;
+        $this->lastname = $lastname;
+        $this->age = $age;
         $this->email = $email;
     }
 }
-
-?>

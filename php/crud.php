@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     function validaempty($data, $field)
     {
 
-        
+
         $resp1 = new respuesta();
         if (empty($data)) {
             $resp1->set('4005', $field . ' required', "", "red", $field);
@@ -78,40 +78,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($accion == 'agregar') {
         //Evita la inyeccion SQL
-        $nombre = "";
-        $apellido = "";
-        $edad = "";
+        $name = "";
+        $lastname = "";
+        $age = "";
         $email = "";
 
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $edad = $_POST['edad'];
+        $name = $_POST['name'];
+        $lastname = $_POST['lastname'];
+        $age = $_POST['age'];
         $email =  $_POST['email'];
 
-        if (!validaempty($nombre, 'name')) return;
-        if (!validaempty($apellido, 'lastnanme')) return;
-        if (!validaempty($edad, 'age')) return;
+        if (!validaempty($name, 'name')) return;
+        if (!validaempty($lastname, 'lastnanme')) return;
+        if (!validaempty($age, 'age')) return;
         if (!validaempty($email, 'email')) return;
 
-        valida($nombre);
-        valida($apellido);
-        valida($edad);
+        valida($name);
+        valida($lastname);
+        valida($age);
         valida($email);
 
-        if (!validastring($nombre, 'name')) return;
-        if (!validastring($apellido, 'lastanme')) return;
-        if (!validainteger($edad, 'age')) return;
+        if (!validastring($name, 'name')) return;
+        if (!validastring($lastname, 'lastanme')) return;
+        if (!validainteger($age, 'age')) return;
         if (!validaemail($email, 'email')) return;
 
 
         $id = 0;
 
         $student = new students();
-        $student->set($id, $nombre, $apellido, $edad, $email);
+        $student->set($id, $name, $lastname, $age, $email);
 
 
         $stmt = $conn->prepare('INSERT INTO students (name,lastname,age,email)VALUES(?,?,?,?)');
-        $stmt->bind_param('ssis', $student->nombre, $student->apellido, $student->edad, $student->email);
+        $stmt->bind_param('ssis', $student->name, $student->lastname, $student->age, $student->email);
 
         if ($stmt->execute()) {
 
@@ -139,37 +139,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($accion == 'actualizar') {
         //Evita la inyeccion SQL
         $id = "";
-        $nombre = "";
-        $apellido = "";
-        $edad = "";
+        $name = "";
+        $lastname = "";
+        $age = "";
         $email = "";
 
         $id = $_POST['id'];
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $edad = $_POST['edad'];
+        $name = $_POST['name'];
+        $lastname = $_POST['lastname'];
+        $age = $_POST['age'];
         $email =  $_POST['email'];
         if (!validaempty($id, 'id')) return;
-        if (!validaempty($nombre, 'name')) return;
-        if (!validaempty($apellido, 'lastnanme')) return;
-        if (!validaempty($edad, 'age')) return;
+        if (!validaempty($name, 'name')) return;
+        if (!validaempty($lastname, 'lastnanme')) return;
+        if (!validaempty($age, 'age')) return;
         if (!validaempty($email, 'email')) return;
         valida($id);
-        valida($nombre);
-        valida($apellido);
-        valida($edad);
+        valida($name);
+        valida($lastname);
+        valida($age);
         valida($email);
 
-        if (!validastring($nombre, 'name')) return;
-        if (!validastring($apellido, 'lastanme')) return;
-        if (!validainteger($edad, 'age')) return;
+        if (!validastring($name, 'name')) return;
+        if (!validastring($lastname, 'lastanme')) return;
+        if (!validainteger($age, 'age')) return;
         if (!validainteger($id, 'id')) return;
         if (!validaemail($email, 'email')) return;
 
         $student = new students();
-        $student->set($id, $nombre, $apellido, $edad, $email);
+        $student->set($id, $name, $lastname, $age, $email);
         $stmt = $conn->prepare('UPDATE students SET name=?,lastname=?,age=?,email=? where id=?');
-        $stmt->bind_param('ssisi', $student->nombre, $student->apellido, $student->edad, $student->email, $student->id);
+        $stmt->bind_param('ssisi', $student->name, $student->lastname, $student->age, $student->email, $student->id);
         $resp1 = new respuesta();
 
         if ($stmt->execute()) {
@@ -198,9 +198,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($accion == 'eliminar') {
 
         $id = "";
-        $nombre = "";
-        $apellido = "";
-        $edad = "";
+        $name = "";
+        $lastname = "";
+        $age = "";
         $email = "";
         $id = $_POST['id'];
 
@@ -209,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!validainteger($id, 'id')) return;
 
         $student = new students();
-        $student->set($id, $nombre, $apellido, $edad, $email);
+        $student->set($id, $name, $lastname, $age, $email);
 
         $stmt = $conn->prepare('DELETE FROM students WHERE id=?');
         $stmt->bind_param('i', $student->id);

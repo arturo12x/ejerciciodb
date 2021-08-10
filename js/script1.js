@@ -5,13 +5,13 @@ $(document).ready(function () {
 
   $("#form1").validate({
     rules: {
-      nombre: {
+      name: {
         required: true,
       },
-      apelido: {
+      lastname: {
         required: true,
       },
-      edad: {
+      age: {
         required: true,
       },
       email: {
@@ -49,21 +49,34 @@ $(document).ready(function () {
         grid
           .find(".command-edit")
           .on("click", function (e) {
-            alert("You pressed edit on row: " + $(this).data("row-id"));
+           /* var id = $(this).data("row-id");
+            $("#id").val(id);*/
+            var row = $(this).closest("tr"); // Obtiene el renglon actual donde se hace click
+            var indice = $(row).index(); //Obtiene el indice del renglon
+            var datos = $("#bgrid").bootgrid("getCurrentRows")[indice]; //Recupera los datos del renglon a partir del indice
+
+            $.each(datos,function (key,value) {
+              $("#"+key).val(value); //como la key o indice de los datos coincide con el nombre de los input puedo utilizarlo (concateno) para reemplazar el dato con su valor
+               });
+
           })
           .end()
           .find(".command-delete")
           .on("click", function (e) {
             var id = $(this).data("row-id");
-            erase(id);
+
+            if (confirm("Esta seguro que desea borrar el registro?")) {
+              erase(id);
+              $("#bgrid").bootgrid("reload");
+            }
           });
       });
   }
 
   function setwhite() {
-    $("#nombre").css("background-color", "white");
-    $("#apellido").css("background-color", "white");
-    $("#edad").css("background-color", "white");
+    $("#name").css("background-color", "white");
+    $("#lastname").css("background-color", "white");
+    $("#age").css("background-color", "white");
     $("#email").css("background-color", "white");
     $("#id").css("background-color", "white");
   }
@@ -71,11 +84,11 @@ $(document).ready(function () {
   function setcolor(field, color) {
     switch (field) {
       case "name":
-        $("#nombre").css("background-color", color);
+        $("#name").css("background-color", color);
         break;
 
       case "lastanme":
-        $("#apellido").css("background-color", color);
+        $("#lastname").css("background-color", color);
         break;
 
       case "email":
@@ -83,7 +96,7 @@ $(document).ready(function () {
         break;
 
       case "age":
-        $("#edad").css("background-color", color);
+        $("#age").css("background-color", color);
         break;
 
       case "id":

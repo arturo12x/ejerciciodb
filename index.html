@@ -32,34 +32,34 @@
         </div>
 
         <div class="form-group">
-          <label for="nombre">Name</label>
+          <label for="name">Name</label>
           <input
             type="text"
             class="form-control"
-            id="nombre"
-            name="nombre"
+            id="name"
+            name="name"
             placeholder="Type student's name"
           />
         </div>
 
         <div class="form-group">
-          <label for="apellido">Lastname</label>
+          <label for="lastname">Lastname</label>
           <input
             type="text"
             class="form-control"
-            id="apellido"
-            name="apellido"
+            id="lastname"
+            name="lastname"
             placeholder="Type student's lastname"
           />
         </div>
 
         <div class="form-group">
-          <label for="edad">Age</label>
+          <label for="age">Age</label>
           <input
             type="number"
             class="form-control"
-            id="edad"
-            name="edad"
+            id="age"
+            name="age"
             placeholder="Type student's age"
           />
         </div>
@@ -76,29 +76,27 @@
           <p id="warning"></p>
         </div>
 
-        <input
-          type="button"
-          value="Add"
-          class="btn btn-primary"
-          id="add"
-          name="add"
-        />
-        <input
-          type="button"
+        <button value="Add" class="btn btn-primary" id="add" name="add">
+          Add
+        </button>
+        <button
           value="Update"
           class="btn btn-primary"
           id="update"
           name="update"
-        />
-        <input
-          type="button"
-          value="Delete"
+        >
+          Update
+        </button>
+
+        <button
+          value="delete"
           class="btn btn-primary"
           id="delete"
           name="delete"
-        />
-
-        <input type="reset" value="Reset" class="btn btn-secondary" />
+        >
+          Delete
+        </button>
+        <button type="reset" value="Reset" class="btn btn-secondary" >Reset</button>
       </form>
     </div>
 
